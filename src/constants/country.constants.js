@@ -45,3 +45,13 @@ export const DETAILS = {
     title: "Sub Region",
   },
 };
+export const FILTER_OPTIONS = [
+  {
+    value: "population",
+    label: "Population",
+  },
+  {
+    value: "officialName",
+    label: "Country Name",
+  },
+];

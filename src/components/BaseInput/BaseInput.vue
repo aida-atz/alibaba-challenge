@@ -53,7 +53,8 @@ const props = defineProps({
     required: false,
   },
   modelValue: {
-    type: String,
+    type: [String, Number],
+    required: true,
   },
 });
 defineEmits(["update:modelValue"]);

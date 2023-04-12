@@ -1,8 +1,9 @@
 <template>
   <section class="countries-section">
+    {{ filterBy }}
     <div class="countries-section__filter-section">
       <SearchInput @search="searchCountry" />
-      <baseSelectOption />
+      <baseSelectOption :options="filterOptions" @input="filterCountry" />
     </div>
     <div class="countries-section__list">
       <Suspense>
@@ -17,13 +18,19 @@
   </section>
 </template>
 <script setup>
-// import baseSelectOption from "@/components/BaseSelectOption.vue";
+import baseSelectOption from "@/components/BaseSelectOption.vue";
 import countryCardLoading from "@/components/Country/CountryCardLoading.vue";
 import SearchInput from "@/components/SearchInput.vue";
-import { reactive, isReactive, defineAsyncComponent } from "vue";
-import { FEILDS, mutation, state } from "@/constants/country.constants";
+import { reactive, isReactive, defineAsyncComponent, ref } from "vue";
+import {
+  FEILDS,
+  mutation,
+  state,
+  FILTER_OPTIONS,
+} from "@/constants/country.constants";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import { useArray } from "@/hooks/useArray";
 const router = useRouter();
 const countryList = defineAsyncComponent(() =>
   import("@/components/Country/CountryList.vue")
@@ -42,7 +49,7 @@ async function searchCountry(value) {
       });
       countries.length = 0;
       response.forEach((res, index) => {
-        countries.push({ ...res, id: index });
+        countries.push({ ...res, id: index, officialName: res.name.official });
       });
     } else {
       getCountries();
@@ -56,7 +63,7 @@ async function getCountries() {
     countries.length = 0;
     const response = await store.dispatch("country/getCountries", customFields);
     response.forEach((res, index) => {
-      countries.push({ ...res, id: index });
+      countries.push({ ...res, id: index, officialName: res.name.official });
     });
   } catch (e) {
     console.log(e);
@@ -66,6 +73,13 @@ getCountries();
 function findSelectedCountry(id) {
   const country = countries.find((country) => country.id == id);
   store.commit("country/setSelectedCountry", country);
+}
+
+const filterOptions = FILTER_OPTIONS;
+const filterBy = ref("");
+const { sortArrayOfObjects } = useArray();
+function filterCountry(value) {
+  countries = sortArrayOfObjects(countries, value);
 }
 </script>
 <style lang="scss">

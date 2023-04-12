@@ -1,33 +1,28 @@
 <template>
   <select
     class="base-select-option__select"
-    v-model="selectedOption"
-    @change="selectOption"
+    :value="modelValue"
+    @input="$emit('input', $event.target.value)"
   >
     <option
       class="base-select-option__option"
       v-for="option in options"
       :key="option.value"
       :value="option.value"
-      :disabled="option.disabled"
-      :selected="option.selected"
-      :lable="option.label"
+      :label="option.label"
     ></option>
   </select>
 </template>
 <script setup>
-import { defineProps, ref } from "vue";
-const props = {
+import { defineProps, ref, defineEmits } from "vue";
+const props = defineProps({
   options: {
     type: Array,
     required: true,
-    validate: () => {
-      console.log(validate);
-    },
   },
-};
-const selectedOption = ref("");
-function selectOption() {}
+});
+defineEmits(["input"]);
+const modelValue = ref();
 </script>
 <style lang="scss" scoped>
 .base-select-option {
@@ -35,13 +30,13 @@ function selectOption() {}
     padding: 1rem;
     border: none;
     border-radius: 5px;
-    background-color: var(--secondary-coor);
+    background-color: var(--secondary-color);
     box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.16);
     color: var(--text-color);
     min-width: 14rem;
   }
   &__option {
-    background-color: var(--secondary-coor);
+    background-color: var(--secondary-color);
   }
 }
 </style>
