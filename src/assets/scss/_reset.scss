@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+:root {
+  height: 100%;
+}
+html {
+  @include typography(body);
+}
+body {
+  font-family: "NunitoSans";
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  height: 100%;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+input,
+select {
+  &:focus {
+    outline: none;
+  }
+}
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}

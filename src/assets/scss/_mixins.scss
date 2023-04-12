@@ -1,0 +1,47 @@
+@mixin position($type, $top, $bottom, $right, $left) {
+  position: $type;
+  top: $top;
+  bottom: $bottom;
+  right: $right;
+  left: $left;
+}
+@mixin typography($element, $screenSize: sm) {
+  $media: map-get($typography, $screenSize);
+  @if $media {
+    $level: map-get($media, $element);
+    @if $level {
+      @each $propertyName, $propertyValue in $level {
+        #{$propertyName}: $propertyValue;
+      }
+    }
+  }
+}
+// @mixin change-theme() {
+//   @if ($selected-theme== "light") {
+//     $selected-theme: "dark";
+//   } @else {
+//     $selected-theme: "light";
+//   }
+// }
+@mixin pulse-animation() {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+}
+@mixin flexible(
+  $direction: row,
+  $justify-content: center,
+  $align-items: center
+) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}

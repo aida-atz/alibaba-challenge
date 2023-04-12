@@ -1,0 +1,79 @@
+$font_path: "~@/assets/fonts/";
+$selected-theme: "light";
+@mixin change-theme($theme) {
+  $selected-theme: $theme !global;
+}
+.light-theme {
+  @include change-theme("light");
+}
+.dark-theme {
+  @include change-theme("dark");
+}
+$theme-colors: (
+  dark: (
+    primary: hsl(207, 26%, 17%),
+    secondary: hsl(209, 23%, 22%),
+    text: hsl(0, 0%, 100%),
+    "dark-gray": hsl(0, 0%, 52%),
+  ),
+  light: (
+    primary: hsl(0, 0%, 98%),
+    secondary: hsl(0, 0%, 100%),
+    text: hsl(200, 15%, 8%),
+    "dark-gray": hsl(0, 0%, 52%),
+  ),
+);
+$typography: (
+  sm: (
+    h1: (
+      font-size: 2rem,
+      font-style: normal,
+      font-weight: 800,
+      line-height: 88px,
+    ),
+    h2: (
+      font-size: 1.75rem,
+      font-style: normal,
+      font-weight: 600,
+      line-height: 55px,
+    ),
+    h3: (
+      font-size: 1.25rem,
+      font-style: normal,
+      font-weight: 500,
+      line-height: 33px,
+    ),
+    h5: (
+      font-size: 20px,
+      font-style: normal,
+      font-weight: 400,
+      line-height: 27px,
+    ),
+    h6: (
+      font-size: 16px,
+      font-style: normal,
+      font-weight: 700,
+      line-height: 22px,
+    ),
+    body: (
+      font-size: 14px,
+      font-style: normal,
+      font-weight: 300,
+      line-height: 21px,
+    ),
+  ),
+  md: (),
+  lg: (),
+  xl: (),
+  2xl: (),
+);
+
+:root {
+  @each $theme, $color in $theme-colors {
+    @if ($theme==$selected-theme) {
+      @each $subname, $subcolor in $color {
+        #{'--'+$subname+'-color'}: $subcolor;
+      }
+    }
+  }
+}
