@@ -1,7 +1,7 @@
 <template>
-  <button class="base-btn" :style="customStyle">
+  <button class="base-btn" :style="customStyle" :type="type">
     <slot name="icon"> </slot>
-    <p class="base-btn--text">{{ title }}</p>
+    <p class="base-btn--text" v-if="title">{{ title }}</p>
   </button>
 </template>
 <script setup>
@@ -9,12 +9,16 @@ import { defineProps } from "vue";
 const props = defineProps({
   title: {
     type: String,
-    required: true,
-    default: "test",
+    required: false,
   },
   customStyle: {
     type: Object,
     required: false,
+  },
+  type: {
+    type: String,
+    required: false,
+    default: "button",
   },
 });
 </script>

@@ -4,24 +4,22 @@
   </label>
   <div class="base-input__container">
     <div class="base-input__icon" v-if="hasIcon">
-      <slot name="icon">
-        <font-awesome-icon :icon="['fas', 'magnifying-glass']" />
-      </slot>
+      <slot name="icon"> </slot>
     </div>
     <input
-      v-model="model"
+      :style="customStyle"
+      :value="modelValue"
       class="base-input__input"
       :type="type"
       :disabled="isdisabled"
       :placeholder="placeholder"
       :name="name"
-      @input="valueEmitter('input')"
-      @change="valueEmitter('change')"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
   </div>
 </template>
 <script setup>
-import { defineProps, defineEmits, ref } from "vue";
+import { defineProps, defineEmits } from "vue";
 const props = defineProps({
   type: {
     type: String,
@@ -50,26 +48,28 @@ const props = defineProps({
     required: false,
     default: false,
   },
+  customStyle: {
+    type: Object,
+    required: false,
+  },
+  modelValue: {
+    type: String,
+  },
 });
-const emit = defineEmits(["input", "change"]);
-const model = ref("");
-function valueEmitter(type) {
-  emit(type, model.value);
-}
+defineEmits(["update:modelValue"]);
 </script>
 <style lang="scss" scoped>
 .base-input {
   &__container {
     display: flex;
     background-color: var(--secondary-coor);
-    box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.16);
     color: var(--text-color);
     border-radius: 5px;
   }
   &__input {
     font-family: "NunitoSans";
     border: none;
-    border-radius: inherit;
+    border-radius: 5px;
     padding: 1rem;
     width: 100%;
     background-color: inherit;

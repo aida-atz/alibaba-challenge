@@ -1,12 +1,7 @@
 <template>
   <section class="countries-section">
     <div class="countries-section__filter-section">
-      <baseInput
-        :placeholder="searchInput.placeholder"
-        :name="searchInput.name"
-        :hasIcon="searchInput.hasIcon"
-        @input="searchCountry"
-      />
+      <SearchInput @search="searchCountry" />
       <baseSelectOption />
     </div>
     <div class="countries-section__list">
@@ -22,9 +17,9 @@
   </section>
 </template>
 <script setup>
-import baseInput from "@/components/BaseInput/BaseInput";
-import baseSelectOption from "@/components/BaseSelectOption.vue";
+// import baseSelectOption from "@/components/BaseSelectOption.vue";
 import countryCardLoading from "@/components/Country/CountryCardLoading.vue";
+import SearchInput from "@/components/SearchInput.vue";
 import { reactive, isReactive, defineAsyncComponent } from "vue";
 import { FEILDS, mutation, state } from "@/constants/country.constants";
 import { useStore } from "vuex";
@@ -34,11 +29,6 @@ const countryList = defineAsyncComponent(() =>
   import("@/components/Country/CountryList.vue")
 );
 const store = useStore();
-const searchInput = reactive({
-  placeholder: "Search for a country ...",
-  name: "search",
-  hasIcon: true,
-});
 let countries = reactive([]);
 const customFields = {
   fields: FEILDS,
