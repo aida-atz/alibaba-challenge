@@ -16,13 +16,7 @@
     }
   }
 }
-// @mixin change-theme() {
-//   @if ($selected-theme== "light") {
-//     $selected-theme: "dark";
-//   } @else {
-//     $selected-theme: "light";
-//   }
-// }
+
 @mixin pulse-animation() {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   @keyframes pulse {
@@ -38,10 +32,30 @@
 @mixin flexible(
   $direction: row,
   $justify-content: center,
-  $align-items: center
+  $align-items: center,
+  $gap: 0
 ) {
   display: flex;
   flex-direction: $direction;
   justify-content: $justify-content;
   align-items: $align-items;
+  gap: $gap;
+}
+@mixin themed() {
+  @each $theme, $map in $themes {
+    .theme--#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), "#{$key}");
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
 }

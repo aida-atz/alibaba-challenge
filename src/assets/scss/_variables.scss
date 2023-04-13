@@ -1,15 +1,10 @@
 $font_path: "~@/assets/fonts/";
-$selected-theme: "light";
-@mixin change-theme($theme) {
-  $selected-theme: $theme !global;
-}
-.light-theme {
-  @include change-theme("light");
-}
-.dark-theme {
-  @include change-theme("dark");
-}
-$theme-colors: (
+$selected-theme: "dark";
+$primary: "primary";
+$secondary: "secondary";
+$text: "text";
+$dark-gray: "dark-gray";
+$themes: (
   dark: (
     primary: hsl(207, 26%, 17%),
     secondary: hsl(209, 23%, 22%),
@@ -32,7 +27,7 @@ $typography: (
       line-height: 88px,
     ),
     h2: (
-      font-size: 1.75rem,
+      font-size: 1.5rem,
       font-style: normal,
       font-weight: 600,
       line-height: 55px,
@@ -62,18 +57,50 @@ $typography: (
       line-height: 21px,
     ),
   ),
-  md: (),
-  lg: (),
+  lg: (
+    h1: (
+      font-size: 42px,
+      font-weight: 800,
+      line-height: 64px,
+      letter-spacing: 0em,
+    ),
+    h2: (
+      font-size: 32px,
+      font-weight: 800,
+      line-height: 56px,
+      letter-spacing: 0em,
+    ),
+    h3: (
+      font-size: 28px,
+      font-weight: 700,
+      line-height: 48px,
+      letter-spacing: 0em,
+    ),
+    h4: (
+      font-size: 20px,
+      font-weight: 700,
+      line-height: 36px,
+      letter-spacing: 0em,
+    ),
+    h5: (
+      font-size: 18px,
+      font-weight: 700,
+      line-height: 32px,
+      letter-spacing: 0em,
+    ),
+    h6: (
+      font-size: 16px,
+      font-weight: 700,
+      line-height: 32px,
+      letter-spacing: 0em,
+    ),
+    body: (
+      font-size: 16px,
+      font-weight: 400,
+      line-height: 32px,
+      letter-spacing: 0em,
+    ),
+  ),
   xl: (),
   2xl: (),
 );
-
-:root {
-  @each $theme, $color in $theme-colors {
-    @if ($theme==$selected-theme) {
-      @each $subname, $subcolor in $color {
-        #{'--'+$subname+'-color'}: $subcolor;
-      }
-    }
-  }
-}

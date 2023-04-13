@@ -38,8 +38,10 @@ function search() {
   display: flex;
   flex-direction: row;
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.16);
-  background-color: var(--primary-color);
   border-radius: 5px;
+  @include themed() {
+    background-color: t($secondary);
+  }
   &__btn {
     box-shadow: none;
     order: -1;

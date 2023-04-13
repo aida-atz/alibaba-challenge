@@ -60,13 +60,10 @@ retrieveSelectedCountry();
 </script>
 <style lang="scss" scoped>
 .details-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include flexible(column, center, center);
   font-size: 1.2rem;
   height: 100%;
-  @include breakpoint(lg) {
+  @include breakpoint(md) {
     flex-direction: row;
   }
 
@@ -82,6 +79,7 @@ retrieveSelectedCountry();
     }
   }
   &__information {
+    @include flexible(row, center);
     width: 100%;
     padding: 3.5rem 0;
     @include breakpoint(lg) {
@@ -89,9 +87,7 @@ retrieveSelectedCountry();
     }
   }
   &__details {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    @include flexible(column, unset, unset, 1.4rem);
     padding: 3.5rem 0;
   }
   &__detail {

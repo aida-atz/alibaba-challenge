@@ -18,8 +18,10 @@
   width: 100%;
   border-radius: 5px;
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.16);
-  background-color: var(--secondary-color);
   margin: auto;
+  @include themed() {
+    background-color: t($secondary);
+  }
   @include pulse-animation();
   &--img {
     height: 150px;
@@ -34,15 +36,19 @@
   &--name {
     display: inline-block;
     height: 0.8rem;
-    background-color: var(--text-color);
     width: 13rem;
     border-radius: 5px;
+    @include themed() {
+      background-color: t($text);
+    }
   }
   &--details {
     span {
       display: block;
       height: 0.5rem;
-      background-color: var(--text-color);
+      @include themed() {
+        background-color: t($text);
+      }
       width: 8rem;
       border-radius: 5px;
       margin-top: 0.7rem;

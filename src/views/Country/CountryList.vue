@@ -2,8 +2,15 @@
   <section class="countries-section">
     {{ filterBy }}
     <div class="countries-section__filter-section">
-      <SearchInput @search="searchCountry" />
-      <baseSelectOption :options="filterOptions" @input="filterCountry" />
+      <SearchInput
+        class="filter-section__search-input"
+        @search="searchCountry"
+      />
+      <baseSelectOption
+        class="filter-section__select-option"
+        :options="filterOptions"
+        @input="filterCountry"
+      />
     </div>
     <div class="countries-section__list">
       <Suspense>
@@ -91,10 +98,24 @@ function filterCountry(value) {
     justify-content: center;
   }
   &__filter-section {
-    display: flex;
+    @include flexible(column, unset, unset, 1rem);
     justify-content: space-between;
     width: 100%;
     margin-bottom: 1.4rem;
+    @include breakpoint(lg) {
+      flex-direction: row;
+    }
+  }
+}
+.filter-section {
+  &__select-option {
+    width: 200px;
+  }
+  &__search-input {
+    max-width: 400px;
+    @include breakpoint(lg) {
+      min-width: 400px;
+    }
   }
 }
 </style>

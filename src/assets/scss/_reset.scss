@@ -8,12 +8,17 @@
 }
 html {
   @include typography(body);
+  @include breakpoint(lg) {
+    @include typography(body, lg);
+  }
 }
 body {
   font-family: "NunitoSans";
-  background-color: var(--primary-color);
-  color: var(--text-color);
   height: 100%;
+  @include themed() {
+    background-color: t($primary);
+    color: t($text);
+  }
 }
 a {
   color: inherit;

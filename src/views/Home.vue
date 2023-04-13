@@ -33,5 +33,8 @@ main {
   @include breakpoint(2xl) {
     max-width: 1536px;
   }
+  @include breakpoint(3xl) {
+    max-width: 1700px;
+  }
 }
 </style>

@@ -63,9 +63,11 @@ defineEmits(["update:modelValue"]);
 .base-input {
   &__container {
     display: flex;
-    background-color: var(--secondary-coor);
-    color: var(--text-color);
     border-radius: 5px;
+    @include themed() {
+      background-color: t($secondary);
+      color: t($text);
+    }
   }
   &__input {
     font-family: "NunitoSans";
@@ -75,6 +77,10 @@ defineEmits(["update:modelValue"]);
     width: 100%;
     background-color: inherit;
     color: inherit;
+    @include typography(body);
+    @include breakpoint(lg) {
+      @include typography(body, lg);
+    }
     &::placeholder {
       color: inherit;
     }

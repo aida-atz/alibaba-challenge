@@ -1,8 +1,5 @@
 <template>
-  <header
-    class="header"
-    :class="{ 'dark-theme': isDarkMode, 'light-theme': !isDarkMode }"
-  >
+  <header class="header">
     <h2 class="header__title">Where in the world?</h2>
     <baseButton
       :title="ModeButton.title"
@@ -29,12 +26,17 @@ let ModeButton = reactive({
 const modeIcon = reactive(["far", "moon"]);
 function changeMode() {
   isDarkMode.value = !isDarkMode.value;
+  const root = document.getElementsByTagName("html")[0];
   if (isDarkMode.value) {
     ModeButton.title = "Dark Mode";
     modeIcon[0] = "fas";
+    root.classList.add("theme--dark");
+    root.classList.remove("theme--light");
   } else {
     ModeButton.title = "Light Mode";
     modeIcon[0] = "far";
+    root.classList.add("theme--light");
+    root.classList.remove("theme--dark");
   }
 }
 </script>
@@ -42,11 +44,20 @@ function changeMode() {
 .header {
   display: flex;
   justify-content: space-between;
-  background-color: var(--secondary-color);
+  @include themed() {
+    background-color: t($secondary);
+    color: t($text);
+  }
   padding: 0 1rem;
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.16);
+  @include breakpoint(lg) {
+    padding: 0.5rem 2rem;
+  }
   &__title {
     @include typography(h2);
+    @include breakpoint(lg) {
+      @include typography(h2, lg);
+    }
   }
 }
 </style>

@@ -67,7 +67,9 @@ function selectCountry() {
   width: 100%;
   border-radius: 5px;
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.16);
-  background-color: var(--secondary-color);
+      @include themed() {
+      background-color: t($secondary);
+    }
   margin: auto;
   &--flag {
     img {
