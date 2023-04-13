@@ -1,45 +1,10 @@
 <template>
   <header class="header">
     <h2 class="header__title">Where in the world?</h2>
-    <baseButton
-      :title="ModeButton.title"
-      :customStyle="ModeButton.style"
-      @click="changeMode"
-    >
-      <template #icon>
-        <font-awesome-icon :icon="modeIcon" />
-      </template>
-    </baseButton>
+    <slot></slot>
   </header>
 </template>
-<script setup>
-import baseButton from "../BaseButton/BaseButton.vue";
-import { ref, reactive } from "vue";
-let isDarkMode = ref(false);
-let ModeButton = reactive({
-  title: "Light Mode",
-  style: {
-    boxShadow: "none",
-    padding: 0,
-  },
-});
-const modeIcon = reactive(["far", "moon"]);
-function changeMode() {
-  isDarkMode.value = !isDarkMode.value;
-  const root = document.getElementsByTagName("html")[0];
-  if (isDarkMode.value) {
-    ModeButton.title = "Dark Mode";
-    modeIcon[0] = "fas";
-    root.classList.add("theme--dark");
-    root.classList.remove("theme--light");
-  } else {
-    ModeButton.title = "Light Mode";
-    modeIcon[0] = "far";
-    root.classList.add("theme--light");
-    root.classList.remove("theme--dark");
-  }
-}
-</script>
+<script setup></script>
 <style lang="scss" scoped>
 .header {
   display: flex;

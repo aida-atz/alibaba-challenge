@@ -46,12 +46,12 @@
     span {
       display: block;
       height: 0.5rem;
-      @include themed() {
-        background-color: t($text);
-      }
       width: 8rem;
       border-radius: 5px;
       margin-top: 0.7rem;
+      @include themed() {
+        background-color: t($text);
+      }
     }
   }
 }
